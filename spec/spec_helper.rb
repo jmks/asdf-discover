@@ -1,5 +1,4 @@
-require "bundler/setup"
-require "asdf/discover"
+require "asdf_discover"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
