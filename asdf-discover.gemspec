@@ -1,8 +1,8 @@
-require_relative 'lib/asdf/discover/version'
+require_relative "lib/asdf_discover/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "asdf-discover"
-  spec.version       = AsdfDiscover:VERSION
+  spec.version       = AsdfDiscover::VERSION
   spec.authors       = ["Jason Schweier"]
   spec.email         = ["jason.schweier@gmail.com"]
 
