@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require "asdf_discover"
+require "fileutils"
+
+FileUtils.cd(ARGV.first) if ARGV.first
+
+results = AsdfDiscover.search
+
+results.each(&method(:p))

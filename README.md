@@ -28,9 +28,10 @@ Run `asdf-discover` in a project directory.
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies.
+After checking out the repo, run `bundle install`.
 Then, run `rake spec` to run the tests.
-You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+You can run the binary locally with: `ruby -Ilib ./exe/asdf-discover path/to/directory`
 
 ## Contributing
 
