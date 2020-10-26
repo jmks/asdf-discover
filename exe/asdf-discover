@@ -5,6 +5,11 @@ require "fileutils"
 
 FileUtils.cd(ARGV.first) if ARGV.first
 
+if File.exist?(AsdfDiscover::TOOL_VERSIONS)
+  puts "#{AsdfDiscover::TOOL_VERSIONS} already exists!"
+  exit(1)
+end
+
 results = AsdfDiscover.search
 
 results.each(&method(:p))
