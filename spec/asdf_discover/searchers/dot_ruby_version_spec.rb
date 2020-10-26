@@ -1,9 +1,6 @@
 require "spec_helper"
 
-require "fileutils"
-require "tmpdir"
-
-RSpec.describe AsdfDiscover::Searchers::DotRubyVersion do
+RSpec.describe AsdfDiscover::Searchers::DotRubyVersion, :searcher do
   context "with a .ruby-version file" do
 
     it "discovers the version" do
@@ -27,22 +24,5 @@ RSpec.describe AsdfDiscover::Searchers::DotRubyVersion do
         expect(result).not_to be_found
       end
     end
-  end
-
-  def in_directory
-    pwd = FileUtils.pwd
-
-    Dir.mktmpdir do |dir|
-      FileUtils.cd(dir)
-
-      yield
-
-      ensure
-        FileUtils.cd(pwd)
-    end
-  end
-
-  def with_file(path, content)
-    File.open(path, "w") { |f| f.write(content) }
   end
 end
