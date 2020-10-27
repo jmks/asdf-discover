@@ -1,5 +1,23 @@
+require:
+  - rubocop-rspec
+
 AllCops:
   TargetRubyVersion: 2.6
+
+Metrics/BlockLength:
+  Exclude:
+    - "Rakefile"
+    - "**/*.rake"
+    - "spec/**/*.rb"
+
+RSpec/ExampleLength:
+  Max: 15
+
+RSpec/FactoryBot/CreateList:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Max: 3
 
 Style/FrozenStringLiteralComment:
   Enabled: false

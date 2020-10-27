@@ -1,16 +1,15 @@
 module AsdfDiscover
-  # The Result of a search by a Searcher.
-  # A Result is either Found or NotFound.
+  # The result of a search by a Searcher.
+  # A result is either Found or NotFound.
 
-  # A Result that was found.
-  # Has fields: language, version, and source
+  # A result that was found.
   Found = Struct.new(:language, :version, :source) do
     def found?
       true
     end
   end
 
-  # A nil Result
+  # A nil result
   class NotFound
     def self.found?
       false
