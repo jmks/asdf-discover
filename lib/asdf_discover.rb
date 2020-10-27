@@ -3,8 +3,9 @@ require "asdf_discover/searchers/dot_ruby_version"
 require "asdf_discover/searchers/gemfile"
 require "asdf_discover/version"
 
+# Namespace for the gem
 module AsdfDiscover
-  TOOL_VERSIONS = ".tool-versions"
+  TOOL_VERSIONS = ".tool-versions".freeze
 
   def self.add_searcher(*searchers)
     @searchers ||= []

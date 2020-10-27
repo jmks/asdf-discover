@@ -1,7 +1,8 @@
 module AsdfDiscover
   module Searchers
+    # Searches in .ruby-version
     class DotRubyVersion
-      RUBY_VERSION_FILE = ".ruby-version"
+      RUBY_VERSION_FILE = ".ruby-version".freeze
 
       def call
         return NotFound unless File.exist?(RUBY_VERSION_FILE)
