@@ -1,5 +1,3 @@
-require "spec_helper"
-
 RSpec.describe AsdfDiscover::Searchers::DotRubyVersion, :searcher do
   context "with a .ruby-version file" do
     it "discovers the version" do

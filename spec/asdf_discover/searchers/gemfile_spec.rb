@@ -1,5 +1,3 @@
-require "spec_helper"
-
 RSpec.describe AsdfDiscover::Searchers::Gemfile, :searcher do
   context "with a Gemfile" do
     context "when it has a ruby method call" do
