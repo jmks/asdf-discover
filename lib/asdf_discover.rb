@@ -20,4 +20,5 @@ module AsdfDiscover
   end
 
   add_searcher Searchers::DotRubyVersion
+  add_searcher Searchers::Gemfile
 end
