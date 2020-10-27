@@ -4,6 +4,9 @@ require:
 AllCops:
   TargetRubyVersion: 2.6
 
+Layout/IndentFirstArrayElement:
+  EnforcedStyle: consistent
+
 Metrics/BlockLength:
   Exclude:
     - "Rakefile"

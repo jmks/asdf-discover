@@ -1,4 +1,5 @@
 require "asdf_discover/result"
+require "asdf_discover/search_result"
 require "asdf_discover/searchers/dot_ruby_version"
 require "asdf_discover/searchers/gemfile"
 require "asdf_discover/version"
@@ -13,10 +14,12 @@ module AsdfDiscover
   end
 
   def self.search
-    @searchers
+    found = @searchers
       .map(&:new)
       .map(&:call)
       .select(&:found?)
+
+    SearchResult.new(found)
   end
 
   add_searcher Searchers::DotRubyVersion

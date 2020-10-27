@@ -10,6 +10,15 @@ if File.exist?(AsdfDiscover::TOOL_VERSIONS)
   exit(1)
 end
 
-results = AsdfDiscover.search
+result = AsdfDiscover.search
 
-results.each(&method(:p))
+unless result.consistent?
+  result.conflicts.each do |conflict|
+    puts "Found multiple versions for #{conflict.language}:"
+
+    conflict.sources.each do |source|
+      puts "  - #{source.version} from #{source.source}"
+    end
+    puts
+  end
+end
