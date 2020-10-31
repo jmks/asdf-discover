@@ -14,11 +14,13 @@ result = AsdfDiscover.search
 
 unless result.consistent?
   result.conflicts.each do |conflict|
-    puts "Found multiple versions for #{conflict.language}:"
-
+    puts "Discovered multiple versions for #{conflict.language}:"
     conflict.sources.each do |source|
       puts "  - #{source.version} from #{source.source}"
     end
     puts
+    puts ".tool-versions will include all versions discovered"
+    puts "asdf, by default, will use the first entry"
+    puts "You should manually reconcile which version to use"
   end
 end
