@@ -7,11 +7,6 @@ module AsdfDiscover
     def found?
       true
     end
-
-    # TODO: update usages of this
-    def language
-      tool
-    end
   end
 
   # A nil result

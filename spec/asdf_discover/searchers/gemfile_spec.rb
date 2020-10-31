@@ -14,7 +14,7 @@ RSpec.describe AsdfDiscover::Searchers::Gemfile, :searcher do
           result = described_class.new.call
 
           expect(result).to be_found
-          expect(result.language).to eq("ruby")
+          expect(result.tool).to eq("ruby")
           expect(result.source).to eq("Gemfile")
         end
       end

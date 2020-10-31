@@ -2,7 +2,7 @@ module AsdfDiscover
   # Amalgamated results from Searchers.
   # Contains the data required to display warnings and write the .tool-versions file.
   class SearchResult
-    Conflict = Struct.new(:language, :sources)
+    Conflict = Struct.new(:tool, :sources)
 
     def initialize(results)
       @results = results
@@ -24,9 +24,9 @@ module AsdfDiscover
 
     def find_conflicts
       @results
-        .group_by(&:language)
-        .filter { |_lang, matches| matches.map(&:version).uniq.length != 1 }
-        .map { |lang, matches| Conflict.new(lang, matches) }
+        .group_by(&:tool)
+        .filter { |_tool, matches| matches.map(&:version).uniq.length != 1 }
+        .map { |tool, matches| Conflict.new(tool, matches) }
     end
 
     def collect_tool_versions

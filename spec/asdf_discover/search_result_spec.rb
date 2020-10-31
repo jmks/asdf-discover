@@ -2,7 +2,7 @@ require "ostruct"
 
 RSpec.describe AsdfDiscover::SearchResult do
   describe "#consistent?" do
-    context "when all versions are the same for a language" do
+    context "when all versions are the same for a tool" do
       it "is consistent" do
         result = described_class.new([
           AsdfDiscover::Found.new("lang", "1.0", ".lang-version"),
@@ -13,7 +13,7 @@ RSpec.describe AsdfDiscover::SearchResult do
       end
     end
 
-    context "when there are multiple versions discovered for a language" do
+    context "when there are multiple versions discovered for a tool" do
       it "is inconsistent" do
         result = described_class.new([
           AsdfDiscover::Found.new("lang", "1.1", ".lang-version"),
@@ -39,8 +39,8 @@ RSpec.describe AsdfDiscover::SearchResult do
     end
 
     describe "each" do
-      it "have a language" do
-        expect(conflict.language).to eq("lang")
+      it "have a tool" do
+        expect(conflict.tool).to eq("lang")
       end
 
       it "have sources" do

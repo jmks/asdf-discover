@@ -14,7 +14,7 @@ result = AsdfDiscover.search
 
 unless result.consistent?
   result.conflicts.each do |conflict|
-    puts "Discovered multiple versions for #{conflict.language}:"
+    puts "Discovered multiple versions for #{conflict.tool}:"
     conflict.sources.each do |source|
       puts "  - #{source.version} from #{source.source}"
     end
