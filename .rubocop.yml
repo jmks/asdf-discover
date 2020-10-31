@@ -4,7 +4,7 @@ require:
 AllCops:
   TargetRubyVersion: 2.6
 
-Layout/IndentFirstArrayElement:
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 
 Metrics/BlockLength:
