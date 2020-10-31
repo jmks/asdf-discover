@@ -31,3 +31,9 @@ Style/StringLiterals:
 
 Style/SymbolArray:
   Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented

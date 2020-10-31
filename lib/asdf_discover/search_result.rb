@@ -1,4 +1,6 @@
 module AsdfDiscover
+  # Amalgamated results from Searchers.
+  # Contains the data required to display warnings and write the .tool-versions file.
   class SearchResult
     Conflict = Struct.new(:language, :sources)
 
@@ -11,7 +13,7 @@ module AsdfDiscover
     end
 
     def conflicts
-      @_conflicts ||= find_conflicts
+      @conflicts ||= find_conflicts
     end
 
     private
