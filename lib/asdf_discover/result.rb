@@ -3,9 +3,14 @@ module AsdfDiscover
   # A result is either Found or NotFound.
 
   # A result that was found.
-  Found = Struct.new(:language, :version, :source) do
+  Found = Struct.new(:tool, :version, :source) do
     def found?
       true
+    end
+
+    # TODO: update usages of this
+    def language
+      tool
     end
   end
 

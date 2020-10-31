@@ -7,6 +7,9 @@ AllCops:
 Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
 Metrics/BlockLength:
   Exclude:
     - "Rakefile"
@@ -20,7 +23,7 @@ RSpec/FactoryBot/CreateList:
   Enabled: false
 
 RSpec/MultipleExpectations:
-  Max: 3
+  Max: 5
 
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -35,5 +38,5 @@ Style/SymbolArray:
 Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: comma
 
-Layout/MultilineMethodCallIndentation:
-  EnforcedStyle: indented
+Style/WordArray:
+  EnforcedStyle: brackets

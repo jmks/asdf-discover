@@ -1,3 +1,5 @@
+require "ostruct"
+
 RSpec.describe AsdfDiscover::SearchResult do
   describe "#consistent?" do
     context "when all versions are the same for a language" do
@@ -47,6 +49,32 @@ RSpec.describe AsdfDiscover::SearchResult do
         expect(conflict.sources[0]).to have_attributes(version: "1.1", source: ".lang-version")
         expect(conflict.sources[1]).to have_attributes(version: "1.2", source: "langfile")
       end
+    end
+  end
+
+  describe "#tool_versions" do
+    it "is in alphabetical order by tool" do
+      result = described_class.new([
+        OpenStruct.new(tool: "bananas"),
+        OpenStruct.new(tool: "oranges"),
+        OpenStruct.new(tool: "apples"),
+      ])
+
+      expect(result.tool_versions.map(&:tool)).to eq(["apples", "bananas", "oranges"])
+    end
+
+    it "includes multiple conflicts, subordered by version" do
+      result = described_class.new([
+        OpenStruct.new(tool: "oranges", version: "rc1"),
+        OpenStruct.new(tool: "oranges", version: "rc1"),
+        OpenStruct.new(tool: "apples", version: "1.1"),
+        OpenStruct.new(tool: "apples", version: "1.0"),
+      ])
+
+      expect(result.tool_versions.length).to eq(3)
+      expect(result.tool_versions[0]).to have_attributes(tool: "apples", version: "1.0")
+      expect(result.tool_versions[1]).to have_attributes(tool: "apples", version: "1.1")
+      expect(result.tool_versions[2]).to have_attributes(tool: "oranges", version: "rc1")
     end
   end
 end

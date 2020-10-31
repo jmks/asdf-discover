@@ -16,6 +16,10 @@ module AsdfDiscover
       @conflicts ||= find_conflicts
     end
 
+    def tool_versions
+      @tool_versions ||= collect_tool_versions
+    end
+
     private
 
     def find_conflicts
@@ -23,6 +27,12 @@ module AsdfDiscover
         .group_by(&:language)
         .filter { |_lang, matches| matches.map(&:version).uniq.length != 1 }
         .map { |lang, matches| Conflict.new(lang, matches) }
+    end
+
+    def collect_tool_versions
+      @results
+        .sort_by { |e| [e.tool, e.version] }
+        .uniq { |e| [e.tool, e.version] }
     end
   end
 end
