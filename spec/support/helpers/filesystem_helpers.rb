@@ -1,7 +1,7 @@
 require "fileutils"
 require "tmpdir"
 
-module SearcherHelpers
+module FilesystemHelpers
   def in_directory
     pwd = FileUtils.pwd
 

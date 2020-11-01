@@ -13,5 +13,5 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
-  config.include(SearcherHelpers, :searcher)
+  config.include(FilesystemHelpers, :filesystem)
 end

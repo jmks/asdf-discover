@@ -1,4 +1,4 @@
-RSpec.describe AsdfDiscover::Searchers::DotRubyVersion, :searcher do
+RSpec.describe AsdfDiscover::Searchers::DotRubyVersion, :filesystem do
   context "with a .ruby-version file" do
     it "discovers the version" do
       in_directory do

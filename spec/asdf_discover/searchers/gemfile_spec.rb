@@ -1,4 +1,4 @@
-RSpec.describe AsdfDiscover::Searchers::Gemfile, :searcher do
+RSpec.describe AsdfDiscover::Searchers::Gemfile, :filesystem do
   context "with a Gemfile" do
     context "when it has a ruby method call" do
       it "discovers the version" do

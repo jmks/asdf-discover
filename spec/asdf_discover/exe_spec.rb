@@ -1,6 +1,6 @@
 require "open3"
 
-RSpec.describe "Executeable", :searcher do
+RSpec.describe "Executeable", :filesystem do
   let!(:exe_path) { File.expand_path("exe/asdf-discover") }
 
   context "when a .tool-versions file exists" do
