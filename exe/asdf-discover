@@ -12,6 +12,11 @@ end
 
 result = AsdfDiscover.search
 
+unless result.any?
+  puts "No tool versions found!"
+  exit(1)
+end
+
 unless result.consistent?
   result.conflicts.each do |conflict|
     puts "Discovered multiple versions for #{conflict.tool}:"
@@ -22,5 +27,11 @@ unless result.consistent?
     puts ".tool-versions will include all versions discovered"
     puts "asdf, by default, will use the first entry"
     puts "You should manually reconcile which version to use"
+  end
+end
+
+File.open(AsdfDiscover::TOOL_VERSIONS, "w") do |f|
+  result.tool_versions.each do |tool_version|
+    f.puts "#{tool_version.tool} #{tool_version.version} # from #{tool_version.source}"
   end
 end

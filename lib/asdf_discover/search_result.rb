@@ -20,6 +20,10 @@ module AsdfDiscover
       @tool_versions ||= collect_tool_versions
     end
 
+    def any?
+      @results.any?
+    end
+
     private
 
     def find_conflicts
