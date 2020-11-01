@@ -15,6 +15,7 @@ RSpec.describe AsdfDiscover::Searchers::Gemfile, :searcher do
 
           expect(result).to be_found
           expect(result.tool).to eq("ruby")
+          expect(result.version).to eq("2.5")
           expect(result.source).to eq("Gemfile")
         end
       end
