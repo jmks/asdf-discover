@@ -24,10 +24,10 @@ unless result.consistent?
       puts "  - #{source.version} from #{source.source}"
     end
     puts
-    puts ".tool-versions will include all versions discovered"
-    puts "asdf, by default, will use the first entry"
-    puts "You should manually reconcile which version to use"
   end
+  puts "You should manually reconcile which version to use"
+  puts ".tool-versions will include all versions discovered"
+  puts "asdf, by default, will use the first entry"
 end
 
 File.open(AsdfDiscover::TOOL_VERSIONS, "w") do |f|
