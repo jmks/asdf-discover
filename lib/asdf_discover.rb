@@ -4,6 +4,7 @@ require "asdf_discover/searchers/dot_node_version"
 require "asdf_discover/searchers/dot_ruby_version"
 require "asdf_discover/searchers/gemfile"
 require "asdf_discover/searchers/go_mod"
+require "asdf_discover/searchers/nvmrc"
 require "asdf_discover/version"
 
 # Namespace for the gem
@@ -28,4 +29,5 @@ module AsdfDiscover
   add_searcher Searchers::DotRubyVersion
   add_searcher Searchers::Gemfile
   add_searcher Searchers::GoMod
+  add_searcher Searchers::Nvmrc
 end
