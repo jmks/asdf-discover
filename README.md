@@ -26,6 +26,29 @@ Run `asdf-discover` in a project directory.
 | node.js | .nvmrc        |
 | node.js | .node-version |
 
+## TODO
+
+* If a version comes from multiple sources, list them all (currently displays the first found)
+* There seems to be 2 ways to find a version:
+  * The contents of a file (e.g. .ruby-version)
+  * A line in a file (e.g. go.mod)
+
+  Consider a DSL for adding more:
+
+  ```ruby
+  class GoMod
+    include Asdf::Searcher
+
+    scan_file "go.mod", for: /go ([0-9.]+)$/
+  end
+
+  class DotRubyVersion
+    include Asdf::Searcher
+
+    file_contents ".ruby-version"
+  end
+  ```
+
 ## Development
 
 After checking out the repo, run `bundle install`.
