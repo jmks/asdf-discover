@@ -29,6 +29,7 @@ Run `asdf-discover` in a project directory.
 ## TODO
 
 * If a version comes from multiple sources, list them all (currently displays the first found)
+* Select a version from `asdf list tool` for versions specified with a requirement, e.g. "~> 1.10"
 * There seems to be 2 ways to find a version:
   * The contents of a file (e.g. .ruby-version)
   * A line in a file (e.g. go.mod)
