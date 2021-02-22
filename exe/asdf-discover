@@ -2,46 +2,74 @@
 
 require "asdf_discover"
 require "fileutils"
+require "optparse"
+require "ostruct"
 require "pathname"
 
+options = OpenStruct.new
+options.latest = false
+options.global = false
+options.path = Dir.pwd
+
 def path(location)
-  case location
-  when :local
-    AsdfDiscover::TOOL_VERSIONS
-  when :home
-    Pathname.new(Dir.home).join(AsdfDiscover::TOOL_VERSIONS).to_s
+  Pathname.new(location).join(AsdfDiscover::TOOL_VERSIONS).to_s
+end
+
+OptionParser.new do |opts|
+  opts.on("--latest", "Update .tool-versions to latest installed") do
+    options.latest = true
   end
+
+  opts.on("--global", "Set working path to $HOME. i.e. --latest --global would update $HOME/.tool-versions to latest installed") do
+    options.global = true
+  end
+end.parse!
+
+if ARGV.first
+  if Dir.exists?(ARGV.first)
+    options.path = File.absolute_path(ARGV.first)
+  else
+    puts "Path #{ARGV.first} does not exist!"
+    exit(1)
+  end
+elsif options.global
+  options.path = Dir.home
 end
 
-FileUtils.cd(ARGV.first) if ARGV.first
+FileUtils.cd(options.path)
 
-if File.exist?(path(:local))
-  puts "#{path(:local)} already exists!"
-  exit(1)
-end
+if options.latest
+  puts "Updating to latest in #{options.path}"
+else
+  if File.exist?(path(options.path))
+    puts "#{path(options.path)} already exists!"
+    exit(1)
+  end
 
-result = AsdfDiscover.search
+  result = AsdfDiscover.search
 
-unless result.any?
-  puts "No tool versions found!"
-  exit(1)
-end
+  unless result.any?
+    puts "No tool versions found!"
+    exit(1)
+  end
 
-unless result.consistent?
-  result.conflicts.each do |conflict|
-    puts "Discovered multiple versions for #{conflict.tool}:"
-    conflict.sources.each do |source|
-      puts "  - #{source.version} from #{source.source}"
+  unless result.consistent?
+    result.conflicts.each do |conflict|
+      puts "Discovered multiple versions for #{conflict.tool}:"
+      conflict.sources.each do |source|
+        puts "  - #{source.version} from #{source.source}"
+      end
+      puts
     end
-    puts
+    puts "You should manually reconcile which version to use"
+    puts ".tool-versions will include all versions discovered"
+    puts "asdf, by default, will use the first entry"
   end
-  puts "You should manually reconcile which version to use"
-  puts ".tool-versions will include all versions discovered"
-  puts "asdf, by default, will use the first entry"
+
+  File.open(AsdfDiscover::TOOL_VERSIONS, "w") do |f|
+    result.tool_versions.each do |tool_version|
+      f.puts "#{tool_version.tool} #{tool_version.version} # from #{tool_version.source}"
+    end
+  end
 end
 
-File.open(AsdfDiscover::TOOL_VERSIONS, "w") do |f|
-  result.tool_versions.each do |tool_version|
-    f.puts "#{tool_version.tool} #{tool_version.version} # from #{tool_version.source}"
-  end
-end
