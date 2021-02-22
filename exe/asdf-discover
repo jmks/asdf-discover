@@ -2,11 +2,21 @@
 
 require "asdf_discover"
 require "fileutils"
+require "pathname"
+
+def path(location)
+  case location
+  when :local
+    AsdfDiscover::TOOL_VERSIONS
+  when :home
+    Pathname.new(Dir.home).join(AsdfDiscover::TOOL_VERSIONS).to_s
+  end
+end
 
 FileUtils.cd(ARGV.first) if ARGV.first
 
-if File.exist?(AsdfDiscover::TOOL_VERSIONS)
-  puts "#{AsdfDiscover::TOOL_VERSIONS} already exists!"
+if File.exist?(path(:local))
+  puts "#{path(:local)} already exists!"
   exit(1)
 end
 
