@@ -16,4 +16,5 @@ RSpec.configure do |config|
   end
 
   config.include(FilesystemHelpers, :filesystem)
+  config.include(CommandHelpers, :commands)
 end

@@ -1,5 +1,5 @@
 module AsdfDiscover::Commands
-  RSpec.describe Search, :filesystem do
+  RSpec.describe Search, :filesystem, :commands do
     around(:each) do |example|
       in_directory do
         example.run
@@ -59,14 +59,6 @@ module AsdfDiscover::Commands
         expect(File.exist?(".tool-versions")).to be(true)
         expect(File.read(".tool-versions")).to include("ruby 2.7.2 # from .ruby-version")
       end
-    end
-
-    def output(command)
-      command.results.map(&:messages).join("\n")
-    end
-
-    def exit_status(command)
-      command.results.select(&:error?).map(&:status).first
     end
   end
 end
