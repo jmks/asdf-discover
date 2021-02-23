@@ -1,5 +1,7 @@
 require "asdf_discover"
 
+require "ostruct"
+
 Dir["spec/support/**/*.rb"].sort.each { |f| require(f.sub("spec/", "")) }
 
 RSpec.configure do |config|

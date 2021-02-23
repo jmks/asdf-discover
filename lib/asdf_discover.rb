@@ -1,3 +1,4 @@
+require "asdf_discover/commands/command"
 require "asdf_discover/result"
 require "asdf_discover/search_result"
 require "asdf_discover/searchers/dot_node_version"
