@@ -15,6 +15,18 @@ def path(location)
   Pathname.new(location).join(AsdfDiscover::TOOL_VERSIONS).to_s
 end
 
+def display_results(command)
+  command.results.each do |result|
+    result.messages.each { |msg| puts msg }
+
+    exit(result.status) if result.error?
+  end
+end
+
+# update CLI:
+# asdf-discover                   => attempt to generate .tool-versions in pwd (search)
+# asdf-discover --update          => update .tool-versions in pwd (search)
+# asdf-discover --update --global => update .tool-versions in $HOME/.tool-versions (via `asdf list`)
 OptionParser.new do |opts|
   opts.on("--latest", "Update .tool-versions to latest installed") do
     options.latest = true
@@ -41,35 +53,9 @@ FileUtils.cd(options.path)
 if options.latest
   puts "Updating to latest in #{options.path}"
 else
-  if File.exist?(path(options.path))
-    puts "#{path(options.path)} already exists!"
-    exit(1)
-  end
+  search = AsdfDiscover::Commands::Search.new
+  search.run(options)
 
-  result = AsdfDiscover.search
-
-  unless result.any?
-    puts "No tool versions found!"
-    exit(1)
-  end
-
-  unless result.consistent?
-    result.conflicts.each do |conflict|
-      puts "Discovered multiple versions for #{conflict.tool}:"
-      conflict.sources.each do |source|
-        puts "  - #{source.version} from #{source.source}"
-      end
-      puts
-    end
-    puts "You should manually reconcile which version to use"
-    puts ".tool-versions will include all versions discovered"
-    puts "asdf, by default, will use the first entry"
-  end
-
-  File.open(AsdfDiscover::TOOL_VERSIONS, "w") do |f|
-    result.tool_versions.each do |tool_version|
-      f.puts "#{tool_version.tool} #{tool_version.version} # from #{tool_version.source}"
-    end
-  end
+  display_results(search)
 end
 
