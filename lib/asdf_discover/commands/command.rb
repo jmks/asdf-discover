@@ -1,5 +1,7 @@
 module AsdfDiscover::Commands
   class Command
+    attr_reader :results
+
     def initialize
       @results = []
     end
@@ -10,6 +12,10 @@ module AsdfDiscover::Commands
 
     def errors?
       @results.any?(&:error?)
+    end
+
+    def warnings?
+      @results.any?(&:warning?)
     end
   end
 end

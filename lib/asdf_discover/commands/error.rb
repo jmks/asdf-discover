@@ -1,5 +1,7 @@
 module AsdfDiscover::Commands
   class Error
+    attr_reader :messages, :status
+
     def initialize(messages:, status:)
       @messages = messages
       @status = status
