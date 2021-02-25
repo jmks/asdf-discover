@@ -1,6 +1,7 @@
 require "asdf_discover/commands/command"
 require "asdf_discover/commands/error"
 require "asdf_discover/commands/search"
+require "asdf_discover/commands/update"
 require "asdf_discover/commands/warning"
 require "asdf_discover/config/reader"
 require "asdf_discover/config/writer"

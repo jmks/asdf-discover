@@ -1,5 +1,9 @@
 module AsdfDiscover::Config
   Entry = Struct.new(:tool, :version, :comment) do
+    def source
+      comment
+    end
+
     def comment?
       comment != nil && comment != ""
     end
