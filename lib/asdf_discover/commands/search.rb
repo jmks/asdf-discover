@@ -47,15 +47,10 @@ module AsdfDiscover::Commands
       @results << Warning.new(messages: lines)
     end
 
-    # TODO: Move to another class
     def write_config
       return if errors?
 
-      File.open(config_path, "w") do |f|
-        search_result.tool_versions.each do |tool_version|
-          f.puts "#{tool_version.tool} #{tool_version.version} # from #{tool_version.source}"
-        end
-      end
+      AsdfDiscover::Config::Writer.new(config_path).write(search_result.tool_versions)
     end
 
     def search_result
